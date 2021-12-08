@@ -14,7 +14,7 @@ function SearchBar() {
       <Tooltip label="search">
         <label htmlFor="search">
           <button>
-            <SearchIcon className="text-gray-500 align-middle -ml-8" />
+            <SearchIcon className="text-gray-500 align-middle -ml-8 mt-1" />
           </button>
         </label>
       </Tooltip>
