@@ -1,14 +1,11 @@
-import { createApi } from 'unsplash-js';
 import Tooltip from '@reach/tooltip';
 import '@reach/tooltip/styles.css';
 import React, { useEffect, useState } from 'react';
 import { Basic } from 'unsplash-js/dist/methods/photos/types';
-import SearchIcon from './SearchIcon';
-import Photo from './Photo';
 
-const api = createApi({
-  accessKey: 'SU9DimtW7peFvhgzcYnidbrzbgKpYvFqFr3s1-2lhvc',
-});
+import SearchIcon from './SearchIcon';
+import PhotoGrid from './PhotoGrid';
+import api from './api/createApi';
 
 function SearchBar() {
   const [query, setQuery] = useState('');
@@ -18,6 +15,7 @@ function SearchBar() {
     status?: 'idle' | 'pending' | 'resolved' | 'rejected';
   }>({ status: 'idle' });
   const { status, results } = data;
+
   function handleSearch(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
     const search = (event.target as HTMLFormElement).search.value;
@@ -64,9 +62,9 @@ function SearchBar() {
         </div>
       ) : null}
 
-      {status === 'resolved' && data.results
-        ? data.results.map((photo) => <Photo photo={photo} />)
-        : null}
+      {status === 'resolved' && data.results ? (
+        <PhotoGrid photos={data.results} />
+      ) : null}
     </div>
   );
 }
